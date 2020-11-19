@@ -226,7 +226,6 @@ public class DataAnalysisService {
 		Sale sale = new Sale();
 		sale.setId(AppConstants.SALE_ID);
 		sale.setSaleId(st.nextToken());
-		//sale.getSaleItens().add(e)
 		treatSaleItemString(st.nextToken(), sale);
 		sale.setSalesmanName(st.nextToken());
 		return sale;
@@ -235,15 +234,18 @@ public class DataAnalysisService {
 	private void treatSaleItemString(String value, Sale sale) {
 		List<SaleItem> saleItemList = new ArrayList<SaleItem>();
 		String line = value.replace("[", "").replace("]", "");
-		
         String[] coupledSalesList = line.split(",");
-       
         for(int i = 0; i < coupledSalesList.length; i++) {
         	String[] salesItemValue = coupledSalesList[i].split("-");
         	SaleItem saleItem = new SaleItem();
         	saleItem.setId(salesItemValue[0]);
         	saleItem.setQuantity(Integer.parseInt(salesItemValue[1]));
         	saleItem.setPrice(new BigDecimal(salesItemValue[2]));
+        	if(saleItem.getQuantity() > 0 && (saleItem.getPrice().compareTo(new BigDecimal(1)) == 1)) {
+        		saleItem.setTotalSaleValue(saleItem.getPrice().multiply(new BigDecimal(saleItem.getQuantity())));
+        	} else {
+        		saleItem.setTotalSaleValue(saleItem.getPrice());
+        	}
         	saleItemList.add(saleItem);
         }
 		sale.setSaleItens(saleItemList);	
@@ -272,7 +274,6 @@ public class DataAnalysisService {
 			report.startCalculation();
 			reportResume = ReportResume.to(report);
 		}
-		
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(new File(AppConstants.READING_DIR + AppConstants.OUTPUT_FILE_NAME)));
 		buffWrite.append(reportResume.getNumberOfCustomers() + "ç" 
 					   + reportResume.getNumberOfSellers() 
@@ -299,7 +300,7 @@ public class DataAnalysisService {
 		List<File> fileList = new ArrayList<File>();
 		for(int i = 0; i < files.length; i++) {
 			fileList.add(files[i]);
-			logger.info("::Processed output file: " + files[i].getName());
+			logger.info("::output file: " + files[i].getName());
 		}
 		return fileList;
 	}

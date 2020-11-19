@@ -7,6 +7,7 @@ public class SaleItem {
 	private String id;
 	private int quantity;
 	private BigDecimal price;
+	private BigDecimal totalSaleValue;
 	
 	public String getId() {
 		return id;
@@ -25,6 +26,12 @@ public class SaleItem {
 	}
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+	public BigDecimal getTotalSaleValue() {
+		return totalSaleValue;
+	}
+	public void setTotalSaleValue(BigDecimal totalSaleValue) {
+		this.totalSaleValue = totalSaleValue;
 	}
 	
 }

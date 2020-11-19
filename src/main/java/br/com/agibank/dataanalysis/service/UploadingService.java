@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import br.com.agibank.dataanalysis.constants.AppConstants;
 import br.com.agibank.dataanalysis.exception.FileInvalidException;
 
 /**
@@ -22,8 +23,6 @@ public class UploadingService {
 	@SuppressWarnings("unused")
 	private static Logger logger = LogManager.getLogger(UploadingService.class);
 	
-	private final static String FILE_EXTENSION = "dat";
-	
 	/**
 	 * 
 	 * Validate file extension
@@ -36,7 +35,7 @@ public class UploadingService {
 		if(Objects.nonNull(file)) {
 			String fileExtension= StringUtils.getFilenameExtension(file);
 			fileExtension = Objects.isNull(fileExtension) ? "none" : fileExtension;
-			if(fileExtension.equalsIgnoreCase(FILE_EXTENSION)) {
+			if(fileExtension.equalsIgnoreCase(AppConstants.FILE_EXTENSION)) {
 				return true;
 			} else {
 				return false;

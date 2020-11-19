@@ -18,6 +18,7 @@ import br.com.agibank.dataanalysis.constants.AppConstants;
 public class AgibankApplication {
 
 	public static void main(String[] args) {
+		
 		new File(AppConstants.UPLOADING_DIR).mkdirs();
 		new File(AppConstants.READING_DIR).mkdirs();
 		new File(AppConstants.PROCESSED_FILES).mkdirs();

@@ -22,7 +22,8 @@ public class ProcessFilesJob {
     @Async
     public void processFilesJob() {
     	try {
-	    	logger.info("-------------------------");
+	    	/*
+    		logger.info("-------------------------");
 	    	logger.info("	INI JOB");    	
 	    	logger.info("-------------------------");
 	    	
@@ -32,8 +33,9 @@ public class ProcessFilesJob {
 	    	dataAnalysisService.getSummaryData();
 	    	
 	    	logger.info("-------------------------");
-	    	logger.info("	FIM JOB");    	
+	    	logger.info("	END JOB");    	
 	    	logger.info("-------------------------");
+	    	*/
     	} catch (Exception e) {
     		logger.error("job processing error. cause: " + e);
 		}
