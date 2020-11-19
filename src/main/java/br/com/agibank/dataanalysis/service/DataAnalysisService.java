@@ -49,6 +49,8 @@ public class DataAnalysisService {
 	private static Logger logger = LogManager.getLogger(DataAnalysisService.class);
 	@Autowired
 	private UploadingService uploadingService;
+	@Autowired
+	private CalculationService calculationService;
 	
 	@Async
 	public void execute() throws GetInputFilesException, FileInvalidException, ReadingInputFileException, IOException, CreateOutputFileException {
@@ -271,7 +273,7 @@ public class DataAnalysisService {
 			reportResume.setNumberOfSellers(0);
 			reportResume.setWorstSeller("none");
 		} else {
-			report.startCalculation();
+			calculationService.executeCalculation(report);
 			reportResume = ReportResume.to(report);
 		}
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(new File(AppConstants.READING_DIR + AppConstants.OUTPUT_FILE_NAME)));

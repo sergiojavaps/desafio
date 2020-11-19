@@ -21,27 +21,19 @@ public class ProcessFilesJob {
     @Scheduled(cron = cronConfig, zone = timeZone)
     @Async
     public void processFilesJob() {
-    	try {
-	    	/*
-    		logger.info("-------------------------");
-	    	logger.info("	INI JOB");    	
-	    	logger.info("-------------------------");
+    	try {	
+	    	logger.info(">>>> INI JOB");    	
 	    	
 	    	dataAnalysisService.execute();	    	
 	    	dataAnalysisService.getAllProcessedFiles();
 	    	dataAnalysisService.getSumaryProcessedFile();
 	    	dataAnalysisService.getSummaryData();
-	    	
-	    	logger.info("-------------------------");
-	    	logger.info("	END JOB");    	
-	    	logger.info("-------------------------");
-	    	*/
+	    		
+	    	logger.info(">>>> END JOB");    	
     	} catch (Exception e) {
     		logger.error("job processing error. cause: " + e);
 		}
     	
     }
-    
-    
-    
+     
 }
