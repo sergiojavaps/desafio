@@ -17,6 +17,12 @@ import br.com.agibank.dataanalysis.exception.InvalidFileDirectoryException;
 import br.com.agibank.dataanalysis.service.DataAnalysisService;
 import br.com.agibank.dataanalysis.service.UploadingService;
 
+/**
+ * class responsible for executing the file processing job
+ * 
+ * @author sergio.melo
+ * 
+ */
 @Component
 public class ProcessFilesJob {
 
@@ -37,6 +43,13 @@ public class ProcessFilesJob {
     	dirList.add(AppConstants.PROCESSED_FILES);		
     }
     
+    /**
+     * 
+     * job scheduling and execution
+     * 
+     * @author sergio.melo
+     * 
+     */
     @Scheduled(cron = cronConfig, zone = timeZone)
     @Async
     public void processFilesJob() {
@@ -46,7 +59,7 @@ public class ProcessFilesJob {
 	    	dataAnalysisService.execute();	    	
 	    	dataAnalysisService.getAllProcessedFiles();
 	    	dataAnalysisService.getSumaryProcessedFile();
-	    	dataAnalysisService.getSummaryData();
+	    	logger.info(dataAnalysisService.getSummaryData());
 	    	logger.info(">>>> END JOB");    	
     	} catch (InvalidFileDirectoryException e) {
 			logger.error("it was not possible to create the directory (s). Cause: " + e);

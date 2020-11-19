@@ -38,7 +38,7 @@ import br.com.agibank.dataanalysis.model.Salesman;
 
 /**
  * 
- * Data analysis business rule class
+ * class responsible for building the data analysis
  * 
  * @author sergio.melo
  *
@@ -121,6 +121,15 @@ public class DataAnalysisService {
 		createOutputFile(report);
 	}
 	
+	/**
+	 * 
+	 * Sends the processed files to the respective directory
+	 * 
+	 * @author sergio.melo
+	 * 
+	 * @param file
+	 * @throws IOException
+	 */
 	private void sendFileToProcessedDirectory(File file) throws IOException {
 		File originProcessed = new File(file.getAbsolutePath());
 		File destinyProcessed = new File(AppConstants.PROCESSED_FILES + file.getName());
@@ -128,6 +137,16 @@ public class DataAnalysisService {
 		//originProcessed.delete();
 	}
 	
+	/**
+	 * 
+	 * Sends the processed files to the respective directory
+	 * 
+	 * @author sergio.melo
+	 * 
+	 * @param src
+	 * @param dst
+	 * @throws IOException
+	 */
 	private void copy(File src, File dst) throws IOException {
 		InputStream in = new FileInputStream(src);
 		OutputStream out = new FileOutputStream(dst);
@@ -233,6 +252,15 @@ public class DataAnalysisService {
 		return sale;
 	}
 	
+	/**
+	 * 
+	 * handles sales item data
+	 * 
+	 * @author sergio.melo
+	 * 
+	 * @param value
+	 * @param sale
+	 */
 	private void treatSaleItemString(String value, Sale sale) {
 		List<SaleItem> saleItemList = new ArrayList<SaleItem>();
 		String line = value.replace("[", "").replace("]", "");
@@ -285,6 +313,15 @@ public class DataAnalysisService {
 		buffWrite.close();
 	}
 	
+	/**
+	 * 
+	 * Get the processed files
+	 * 
+	 * @author sergio.melo
+	 * 
+	 * @return
+	 * @throws FileInvalidException
+	 */
 	public List<File> getAllProcessedFiles() throws FileInvalidException {
 		File file = new File(AppConstants.PROCESSED_FILES);
 		File[] files = file.listFiles();
@@ -296,6 +333,13 @@ public class DataAnalysisService {
 		return fileList;
 	}
 	
+	/**
+	 * 
+	 * Get the output sumary processed file 
+	 * 
+	 * @return
+	 * @throws FileInvalidException
+	 */
 	public List<File> getSumaryProcessedFile() throws FileInvalidException {
 		File file = new File(AppConstants.READING_DIR);
 		File[] files = file.listFiles();
@@ -307,6 +351,16 @@ public class DataAnalysisService {
 		return fileList;
 	}
 	
+	/**
+	 * 
+	 * Takes the results of the processed data in the output file 
+	 * 
+	 * @author sergio.melo
+	 * 
+	 * @return
+	 * @throws SumaryAnalysisException
+	 * @throws IOException
+	 */
 	public String getSummaryData() throws SumaryAnalysisException, IOException {
 		StringBuilder out = new StringBuilder();
 		ReportResume reportResume = getSummaryOfAnalysis();
@@ -315,7 +369,6 @@ public class DataAnalysisService {
 		out.append(">> Number Sellers: ").append(reportResume.getNumberOfSellers()).append(System.getProperty("line.separator"));
 		out.append(">> Most Expensive Sale Id: ").append(reportResume.getMostExpensiveSaleId()).append(System.getProperty("line.separator"));
 		out.append(">> Worst Seller: ").append(reportResume.getWorstSeller()).append(System.getProperty("line.separator"));
-		logger.info(out.toString());
 		return out.toString();
 	}
 	

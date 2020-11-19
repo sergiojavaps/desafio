@@ -13,6 +13,13 @@ import br.com.agibank.dataanalysis.model.Client;
 import br.com.agibank.dataanalysis.model.Report;
 import br.com.agibank.dataanalysis.model.Salesman;
 
+/**
+ * 
+ * class responsible for obtaining the result of the analyzed data
+ * 
+ * @author sergio.melo
+ *
+ */
 @Service
 public class CalculationService {
 
@@ -23,6 +30,14 @@ public class CalculationService {
 		getTheWorstSeller(report);
 	}
 	
+	/**
+	 * 
+	 * Get the most expensive sale id
+	 * 
+	 * @author sergio.melo
+	 * 
+	 * @param report
+	 */
 	@SuppressWarnings("unchecked")
 	private void getMostExpensiveSaleId(Report report) {
 		Map<String, BigDecimal> expensiveSaleMap = new HashMap<String, BigDecimal>();
@@ -51,6 +66,14 @@ public class CalculationService {
 		report.setMostExpensiveSaleId(reversesAndOrders.get(reversesAndOrders.lastKey()).toString());
 	}
 	
+	/**
+	 * 
+	 * Get the worst seller
+	 * 
+	 * @author sergio.melo
+	 * 
+	 * @param report
+	 */
 	@SuppressWarnings("unchecked")
 	private void getTheWorstSeller(Report report) {
 		Map<String, BigDecimal> salesmanMap = new HashMap<String, BigDecimal>();
@@ -77,6 +100,14 @@ public class CalculationService {
 		 report.setWorstSeller(reversesAndOrders.get(reversesAndOrders.firstKey()).toString()); 
 	}
 	
+	/**
+	 * 
+	 * Get total sellers
+	 * 
+	 * @author sergio
+	 * 
+	 * @param report
+	 */
 	private void getTotalSellers(Report report) {
 		Map<String, String> salesmanMap = new HashMap<String, String>();
 		for(Salesman salesman : report.getSalesmanList()) {
@@ -87,6 +118,14 @@ public class CalculationService {
 		report.setSalespersonQuantityInInputFile(salesmanMap.size()); 
 	}
 	
+	/**
+	 * 
+	 * Get the total customers
+	 * 
+	 * @author sergio.melo
+	 * 
+	 * @param report
+	 */
 	private void getTotalCustomers(Report report) {
 		Map<String, String> clientMap = new HashMap<String, String>();
 		for(Client client : report.getClientList()) {

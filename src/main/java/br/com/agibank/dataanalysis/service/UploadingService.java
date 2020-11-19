@@ -13,7 +13,7 @@ import br.com.agibank.dataanalysis.exception.InvalidFileDirectoryException;
 
 /**
  * 
- * Uploading service class
+ * class responsible for the web upload rule for files
  * 
  * @author sergio.melo
  *
@@ -43,6 +43,15 @@ public class UploadingService {
 		}
 	}
 	
+	/**
+	 * 
+	 * Validates if the directory exists, if not, create a new directory
+	 * 
+	 * @author sergio.melo
+	 * 
+	 * @param dir
+	 * @throws InvalidFileDirectoryException
+	 */
 	public void validateFileDirectory(String dir) throws InvalidFileDirectoryException {
 		File file = new File(dir);
 		if(!file.exists()) {
@@ -50,6 +59,15 @@ public class UploadingService {
 		}
 	}
 	
+	/**
+	 * 
+	 * Validates if the directory exists, if not, create a new directory
+	 * 
+	 * @author sergio.melo
+	 * 
+	 * @param dirList
+	 * @throws InvalidFileDirectoryException
+	 */
 	public void validateFileDirectory(List<String> dirList) throws InvalidFileDirectoryException {
 		for(String dir : dirList) {
 			File file = new File(dir);

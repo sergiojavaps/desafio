@@ -26,6 +26,13 @@ import br.com.agibank.dataanalysis.model.ReportResume;
 import br.com.agibank.dataanalysis.service.DataAnalysisService;
 import br.com.agibank.dataanalysis.service.UploadingService;
 
+/**
+ * 
+ * class responsible for data reporting resources
+ * 
+ * @author sergio.melo
+ *
+ */
 @RestController
 public class ReportResource {
 
@@ -44,6 +51,16 @@ public class ReportResource {
     	dirList.add(AppConstants.PROCESSED_FILES);		
     }
 	
+	/**
+	 * 
+	 * Responsible for displaying the data analysis report on the web.
+	 * Responsible for creating the output file.
+	 * 
+	 * @author sergio.melo
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@Async
 	@RequestMapping("/report")
 	public ModelAndView showReport(Model model) {
