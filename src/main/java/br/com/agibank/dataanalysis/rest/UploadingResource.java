@@ -61,7 +61,7 @@ public class UploadingResource {
 	 */
 	@Async
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ModelAndView uploadingPost(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles) { 
+    public ModelAndView uploadingPost(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles, Model model) { 
     	HashMap<String, Object> params = new HashMap<String, Object>();
     	List<FileNotAllowed> fileNotAllowedList = new ArrayList<FileNotAllowed>();
 		try {
@@ -72,9 +72,11 @@ public class UploadingResource {
 	    	params.put("files", fileNotAllowedList);
 	    	return new ModelAndView("redirect:/");
     	} catch(FileNotFoundException e) {
-    		return new ModelAndView("redirect:/");
+    		model.addAttribute("errorMessage", "File Not Found. Cause: " + e);
+    		return new ModelAndView("/error");
     	} catch(IOException e) {
-    		return new ModelAndView("redirect:/");
+    		model.addAttribute("errorMessage", "select the file to upload or IO error. Cause: " + e);
+    		return new ModelAndView("/error");
     	}  
 		
     }

@@ -1,14 +1,15 @@
 package br.com.agibank.dataanalysis.service;
 
+import java.io.File;
+import java.util.List;
 import java.util.Objects;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import br.com.agibank.dataanalysis.constants.AppConstants;
 import br.com.agibank.dataanalysis.exception.FileInvalidException;
+import br.com.agibank.dataanalysis.exception.InvalidFileDirectoryException;
 
 /**
  * 
@@ -20,9 +21,6 @@ import br.com.agibank.dataanalysis.exception.FileInvalidException;
 @Service
 public class UploadingService {
 
-	@SuppressWarnings("unused")
-	private static Logger logger = LogManager.getLogger(UploadingService.class);
-	
 	/**
 	 * 
 	 * Validate file extension
@@ -42,6 +40,22 @@ public class UploadingService {
 			}
 		} else {
 			return false;
+		}
+	}
+	
+	public void validateFileDirectory(String dir) throws InvalidFileDirectoryException {
+		File file = new File(dir);
+		if(!file.exists()) {
+			new File(dir).mkdirs();
+		}
+	}
+	
+	public void validateFileDirectory(List<String> dirList) throws InvalidFileDirectoryException {
+		for(String dir : dirList) {
+			File file = new File(dir);
+			if(!file.exists()) {
+				new File(dir).mkdirs();
+			}
 		}
 	}
 	
