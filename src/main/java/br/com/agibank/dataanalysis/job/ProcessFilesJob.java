@@ -54,13 +54,13 @@ public class ProcessFilesJob {
     @Async
     public void processFilesJob() {
     	try {	
-	    	logger.info(">>>> INI JOB");    		  
+    		logger.info(">>>> INI JOB");    		  
 	    	uploadingService.validateFileDirectory(dirList);
 	    	dataAnalysisService.execute();	    	
 	    	dataAnalysisService.getAllProcessedFiles();
 	    	dataAnalysisService.getSumaryProcessedFile();
 	    	logger.info(dataAnalysisService.getSummaryData());
-	    	logger.info(">>>> END JOB");    	
+	    	logger.info(">>>> END JOB");	    	  
     	} catch (InvalidFileDirectoryException e) {
 			logger.error("it was not possible to create the directory (s). Cause: " + e);
 		} catch (Exception e) {

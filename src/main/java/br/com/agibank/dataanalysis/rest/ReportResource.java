@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.agibank.dataanalysis.constants.AppConstants;
+import br.com.agibank.dataanalysis.exception.CalcException;
 import br.com.agibank.dataanalysis.exception.CreateOutputFileException;
 import br.com.agibank.dataanalysis.exception.FileInvalidException;
 import br.com.agibank.dataanalysis.exception.GetInputFilesException;
@@ -95,9 +96,13 @@ public class ReportResource {
 			logger.error("it was not possible to obtain the summary of the analyzed data. Cause: " + sae);
 			model.addAttribute("errorMessage", "it was not possible to obtain the summary of the analyzed data. Cause: " + sae);
 			return new ModelAndView("/error");
-		} catch (InvalidFileDirectoryException e) {
-			logger.error("it was not possible to create the directory (s). Cause: " + e);
-			model.addAttribute("errorMessage", "it was not possible to create the directory (s). Cause: " + e);
+		} catch (InvalidFileDirectoryException ifde) {
+			logger.error("it was not possible to create the directory (s). Cause: " + ifde);
+			model.addAttribute("errorMessage", "it was not possible to create the directory (s). Cause: " + ifde);
+			return new ModelAndView("/error");
+		} catch (CalcException ce) {
+			logger.error("it was not possible to perform the calculation of the file data. Cause: " + ce);
+			model.addAttribute("errorMessage", "it was not possible to perform the calculation of the file data. Cause: " + ce);
 			return new ModelAndView("/error");
 		}
 	    return new ModelAndView("report");

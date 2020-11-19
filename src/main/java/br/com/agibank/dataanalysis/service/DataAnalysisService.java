@@ -24,6 +24,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import br.com.agibank.dataanalysis.constants.AppConstants;
+import br.com.agibank.dataanalysis.exception.CalcException;
 import br.com.agibank.dataanalysis.exception.CreateOutputFileException;
 import br.com.agibank.dataanalysis.exception.FileInvalidException;
 import br.com.agibank.dataanalysis.exception.GetInputFilesException;
@@ -53,7 +54,8 @@ public class DataAnalysisService {
 	private CalculationService calculationService;
 	
 	@Async
-	public void execute() throws GetInputFilesException, FileInvalidException, ReadingInputFileException, IOException, CreateOutputFileException {
+	public void execute() throws GetInputFilesException, FileInvalidException, ReadingInputFileException, 
+						IOException, CreateOutputFileException, CalcException {
 		List<File> filesIn = getAllInputFiles();
 		if(Objects.isNull(filesIn) || filesIn.isEmpty()) {
 			Report report = null;
@@ -109,8 +111,9 @@ public class DataAnalysisService {
 	 * @throws ReadingInputFileException
 	 * @throws IOException
 	 * @throws CreateOutputFileException 
+	 * @throws CalcException 
 	 */
-	private void createOutputFile(List<File> files) throws ReadingInputFileException, IOException, CreateOutputFileException {
+	private void createOutputFile(List<File> files) throws ReadingInputFileException, IOException, CreateOutputFileException, CalcException {
 		Report report = new Report();
 		for(File file : files) {
 			readingInputFile(file, report);
@@ -291,8 +294,9 @@ public class DataAnalysisService {
 	 * @throws CreateOutputFileException
 	 * @throws FileNotFoundException
 	 * @throws IOException
+	 * @throws CalcException 
 	 */
-	private void createOutputFile(Report report) throws CreateOutputFileException, FileNotFoundException, IOException {
+	private void createOutputFile(Report report) throws CreateOutputFileException, FileNotFoundException, IOException, CalcException {
 		ReportResume reportResume = null;
 		if(Objects.isNull(report)) {
 			reportResume = new ReportResume();

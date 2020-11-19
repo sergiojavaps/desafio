@@ -9,6 +9,7 @@ import java.util.TreeMap;
 
 import org.springframework.stereotype.Service;
 
+import br.com.agibank.dataanalysis.exception.CalcException;
 import br.com.agibank.dataanalysis.model.Client;
 import br.com.agibank.dataanalysis.model.Report;
 import br.com.agibank.dataanalysis.model.Salesman;
@@ -23,7 +24,7 @@ import br.com.agibank.dataanalysis.model.Salesman;
 @Service
 public class CalculationService {
 
-	public void executeCalculation(Report report) {
+	public void executeCalculation(Report report) throws CalcException {
 		getMostExpensiveSaleId(report);
 		getTotalSellers(report);
 		getTotalCustomers(report);
@@ -39,7 +40,7 @@ public class CalculationService {
 	 * @param report
 	 */
 	@SuppressWarnings("unchecked")
-	private void getMostExpensiveSaleId(Report report) {
+	private void getMostExpensiveSaleId(Report report) throws CalcException {
 		Map<String, BigDecimal> expensiveSaleMap = new HashMap<String, BigDecimal>();
 		for(int i = 0; i < report.getSaleList().size(); i++) {
 			for(int j = 0; j < report.getSaleList().get(i).getSaleItens().size(); j++) {
@@ -75,7 +76,7 @@ public class CalculationService {
 	 * @param report
 	 */
 	@SuppressWarnings("unchecked")
-	private void getTheWorstSeller(Report report) {
+	private void getTheWorstSeller(Report report) throws CalcException {
 		Map<String, BigDecimal> salesmanMap = new HashMap<String, BigDecimal>();
 		for(int i = 0; i < report.getSaleList().size(); i++) {
 			for(int j = 0; j < report.getSaleList().get(i).getSaleItens().size(); j++) {	
@@ -108,7 +109,7 @@ public class CalculationService {
 	 * 
 	 * @param report
 	 */
-	private void getTotalSellers(Report report) {
+	private void getTotalSellers(Report report) throws CalcException {
 		Map<String, String> salesmanMap = new HashMap<String, String>();
 		for(Salesman salesman : report.getSalesmanList()) {
 			if(!salesmanMap.containsKey(salesman.getCpf())) {
@@ -126,7 +127,7 @@ public class CalculationService {
 	 * 
 	 * @param report
 	 */
-	private void getTotalCustomers(Report report) {
+	private void getTotalCustomers(Report report) throws CalcException {
 		Map<String, String> clientMap = new HashMap<String, String>();
 		for(Client client : report.getClientList()) {
 			if(!clientMap.containsKey(client.getCnpj())) {

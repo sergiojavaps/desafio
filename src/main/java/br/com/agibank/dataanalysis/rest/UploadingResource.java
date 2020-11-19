@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,8 @@ import br.com.agibank.dataanalysis.model.FileNotAllowed;
  */
 @RestController
 public class UploadingResource {
+	
+	private static Logger logger = LogManager.getLogger(UploadingResource.class);
 	
 	/**
 	 * 
@@ -72,9 +76,11 @@ public class UploadingResource {
 	    	params.put("files", fileNotAllowedList);
 	    	return new ModelAndView("redirect:/");
     	} catch(FileNotFoundException e) {
+    		logger.error("File Not Found. Cause: " + e);
     		model.addAttribute("errorMessage", "File Not Found. Cause: " + e);
     		return new ModelAndView("/error");
     	} catch(IOException e) {
+    		logger.error("select the file to upload or IO error. Cause: " + e);
     		model.addAttribute("errorMessage", "select the file to upload or IO error. Cause: " + e);
     		return new ModelAndView("/error");
     	}  
