@@ -13,7 +13,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import br.com.agibank.dataanalysis.constants.AppConstants;
-import br.com.agibank.dataanalysis.exception.InvalidFileDirectoryException;
 import br.com.agibank.dataanalysis.service.DataAnalysisService;
 import br.com.agibank.dataanalysis.service.UploadingService;
 
@@ -35,6 +34,9 @@ public class ProcessFilesJob {
     private UploadingService uploadingService;
     private List<String> dirList = null;
     
+    private long totalFile;
+    private long totalFileTemp;
+    
     @PostConstruct
     public void ini() {    	
 		dirList = new ArrayList<String>();
@@ -54,18 +56,21 @@ public class ProcessFilesJob {
     @Async
     public void processFilesJob() {
     	try {	
-    		logger.info(">>>> INI JOB");    		  
-	    	uploadingService.validateFileDirectory(dirList);
-	    	dataAnalysisService.execute();	    	
-	    	dataAnalysisService.getAllProcessedFiles();
-	    	dataAnalysisService.getSumaryProcessedFile();
-	    	logger.info(dataAnalysisService.getSummaryData());
-	    	logger.info(">>>> END JOB");	    	  
-    	} catch (InvalidFileDirectoryException e) {
-			logger.error("it was not possible to create the directory (s). Cause: " + e);
-		} catch (Exception e) {
-    		logger.error("job processing error. cause: " + e);
-		}    	
+    		totalFileTemp = uploadingService.getTotalFilesByBytes(); 
+    		if(totalFile != totalFileTemp) { 
+    			logger.info(">>>> INI JOB");   
+		    	uploadingService.validateFileDirectory(dirList);
+		    	dataAnalysisService.execute();	    	
+		    	dataAnalysisService.getAllProcessedFiles();
+		    	dataAnalysisService.getSumaryProcessedFile();
+		    	logger.info(dataAnalysisService.getSummaryData());
+		    	logger.info(">>>> END JOB");	    	  
+    		}
+    		totalFile = totalFileTemp != totalFile ? totalFileTemp : totalFile;
+    	} catch (Exception e) {
+			logger.error("it was not possible to run the job. Cause: " + e);
+		} 
+		   	
     }
      
 }

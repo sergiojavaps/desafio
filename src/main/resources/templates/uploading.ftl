@@ -1,7 +1,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Uploading Files Agibank</title>
+        <title>Data Analysis Agibank</title>
     </head>
 
     <body onload="updateSize();">
@@ -15,19 +15,41 @@
             <p>
                 <input type="submit" value="Upload files"> 
                 
-                <a href="report">Show Data Analysis Reports</a>
+                <a href="report">Show Data Analysis Result Reports</a>
                 
             </p>
         </form>
         
-        <div>
-            <div>Uploaded files:</div>
-            <#list files as file>
-            <div>
-            ${file.getName()}
-            </div>
-            </#list>
+        <div style="width:100%; background-color:blue;">
+	        <div style="width:15%; height: 30%; display:inline-block; float:left; ">
+	            <div>Uploaded files:</div>
+	            <#list files as file>
+	            <div>
+	            ${file.getName()}
+	            </div>
+	            </#list>
+	        </div>
+	        
+	        <div style="width:12%; height: 30%; display:inline-block; float:left; ">
+	            <div>Processed files:</div>
+	            <#list procFiles as file>
+	            <div>
+	            ${file.getName()}
+	            </div>
+	            </#list>
+	        </div>
+	        
+	        <div style="width:12%; height: 30%; display:inline-block; float:left; ">
+	            <div>Result of file processing:</div>
+	            <#list result as file>
+	            <div>
+	            ${file.getName()}
+	            </div>
+	            </#list>
+	        </div>
+	        
         </div>
+        
         <script>
             function updateSize() {
                 var nBytes = 0,
@@ -45,6 +67,8 @@
                 document.getElementById("fileNum").innerHTML = nFiles;
                 document.getElementById("fileSize").innerHTML = sOutput;
             }
+            
+           
         </script>
     </body>
 </html>

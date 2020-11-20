@@ -366,7 +366,7 @@ public class DataAnalysisService {
 	 * @throws IOException
 	 */
 	public String getSummaryData() throws SumaryAnalysisException, IOException {
-		StringBuilder out = new StringBuilder();
+		StringBuilder out = new StringBuilder(System.getProperty("line.separator"));
 		ReportResume reportResume = getSummaryOfAnalysis();
 		out.append("::Sumary Data::").append(System.getProperty("line.separator"));
 		out.append(">> Number Customers: ").append(reportResume.getNumberOfCustomers()).append(System.getProperty("line.separator"));

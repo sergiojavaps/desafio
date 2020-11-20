@@ -6,7 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class ConfigProperties {
 
 	private String timeJob;
-	private String path;
+	private String pathIn;
+	private String pathOut;
+	private String pathProcessed;
 	
 	public String getTimeJob() {
 		return timeJob;
@@ -14,11 +16,23 @@ public class ConfigProperties {
 	public void setTimeJob(String timeJob) {
 		this.timeJob = timeJob;
 	}
-	public String getPath() {
-		return path;
+	public String getPathIn() {
+		return pathIn;
 	}
-	public void setPath(String path) {
-		this.path = path;
+	public void setPathIn(String pathIn) {
+		this.pathIn = pathIn;
+	}
+	public String getPathOut() {
+		return pathOut;
+	}
+	public void setPathOut(String pathOut) {
+		this.pathOut = pathOut;
+	}
+	public String getPathProcessed() {
+		return pathProcessed;
+	}
+	public void setPathProcessed(String pathProcessed) {
+		this.pathProcessed = pathProcessed;
 	}
 	
 }
