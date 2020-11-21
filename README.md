@@ -1,3 +1,4 @@
 # Desafio Agibank
 
-## Run 
+# Run 
+mvnw spring-boot:run
