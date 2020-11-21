@@ -7,15 +7,20 @@ import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.agibank.dataanalysis.constants.AppConstants;
+import br.com.agibank.dataanalysis.exception.CalcException;
+import br.com.agibank.dataanalysis.exception.CreateOutputFileException;
 import br.com.agibank.dataanalysis.exception.FileInvalidException;
+import br.com.agibank.dataanalysis.exception.GetInputFilesException;
 import br.com.agibank.dataanalysis.exception.InvalidFileDirectoryException;
 import br.com.agibank.dataanalysis.exception.MemoryExceededException;
+import br.com.agibank.dataanalysis.exception.ReadingInputFileException;
 
 /**
  * 
@@ -28,6 +33,8 @@ import br.com.agibank.dataanalysis.exception.MemoryExceededException;
 public class UploadingService {
 
 	private static Logger logger = LogManager.getLogger(DataAnalysisService.class);
+	@Autowired
+	private DataAnalysisService dataAnalysisService;
 	
 	/**
 	 * 
@@ -37,15 +44,32 @@ public class UploadingService {
 	 * @throws IllegalStateException
 	 * @throws FileInvalidException
 	 * @throws IOException
+	 * @throws CalcException 
+	 * @throws CreateOutputFileException 
+	 * @throws ReadingInputFileException 
+	 * @throws GetInputFilesException 
 	 */
 	@Async
-	public void uploadingPost(MultipartFile[] uploadingFiles) throws IllegalStateException, FileInvalidException, IOException {
+	public void uploadingPost(MultipartFile[] uploadingFiles) throws IOException {		
+		
 		for(MultipartFile uploadedFile : uploadingFiles) {
             File file = new File(AppConstants.UPLOADING_DIR + uploadedFile.getOriginalFilename());
-            if(isValideFileExtension(file.getAbsolutePath())) {
-            	uploadedFile.transferTo(file);
-            }	            	       	            	            	      	      
-        }
+			try {
+				if(isValideFileExtension(file.getAbsolutePath())) {
+					uploadedFile.transferTo(file);
+				}
+			} catch (IllegalStateException | FileInvalidException | IOException e) {
+				logger.error("it was not possible to upload the file " + file.getName() + ", the file was moved to "
+						+ "the folder of the files with processing failures. Cause: " + e);
+				dataAnalysisService.sendFileToProcessingFailureDirectory(file);
+			}
+		}	
+		try {
+			dataAnalysisService.execute();
+		} catch (GetInputFilesException | FileInvalidException | CreateOutputFileException | CalcException e) {			
+			logger.error(e);
+		}
+		
 	}
 	
 	/**

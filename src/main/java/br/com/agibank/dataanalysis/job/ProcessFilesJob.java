@@ -33,7 +33,6 @@ public class ProcessFilesJob {
     @Autowired
     private UploadingService uploadingService;
     private List<String> dirList = null;
-    
     private long totalFile;
     private long totalFileTemp;
     
@@ -42,7 +41,8 @@ public class ProcessFilesJob {
 		dirList = new ArrayList<String>();
     	dirList.add(AppConstants.READING_DIR);
     	dirList.add(AppConstants.UPLOADING_DIR);
-    	dirList.add(AppConstants.PROCESSED_FILES);		
+    	dirList.add(AppConstants.PROCESSED_FILES);
+    	dirList.add(AppConstants.PROCESSING_FAILURE_DIR);
     }
     
     /**
@@ -62,15 +62,15 @@ public class ProcessFilesJob {
 		    	uploadingService.validateFileDirectory(dirList);
 		    	dataAnalysisService.execute();	    	
 		    	dataAnalysisService.getAllProcessedFiles();
-		    	dataAnalysisService.getSumaryProcessedFile();
+		    	dataAnalysisService.getFailProcessedFile();
+		    	dataAnalysisService.getSumaryProcessedFile();		    	
 		    	logger.info(dataAnalysisService.getSummaryData());
 		    	logger.info(">>>> END JOB");	    	  
     		}
     		totalFile = totalFileTemp != totalFile ? totalFileTemp : totalFile;
     	} catch (Exception e) {
 			logger.error("it was not possible to run the job. Cause: " + e);
-		} 
-		   	
+		} 		   	
     }
      
 }

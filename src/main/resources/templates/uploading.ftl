@@ -6,7 +6,7 @@
 
     <body onload="updateSize();">
         
-        <form name="uploadingForm" enctype="multipart/form-data" action="/" method="POST">
+        <form name="uploadingForm" enctype="multipart/form-data" action="${appContextName}/up" method="POST">
             <p>
                 <input id="fileInput" type="file" name="uploadingFiles" onchange="updateSize();" multiple>
                 selected files: <span id="fileNum">0</span>;
@@ -32,18 +32,27 @@
 	        
 	        <div style="width:12%; height: 30%; display:inline-block; float:left; ">
 	            <div>Processed files:</div>
-	            <#list procFiles as file>
+	            <#list procFiles as filep>
 	            <div>
-	            ${file.getName()}
+	            ${filep.getName()}
+	            </div>
+	            </#list>
+	        </div>
+	        
+	        <div style="width:12%; height: 30%; display:inline-block; float:left; ">
+	            <div>Failed processed files:</div>
+	            <#list failFiles as failFile>
+	            <div>
+	            ${failFile.getName()}
 	            </div>
 	            </#list>
 	        </div>
 	        
 	        <div style="width:12%; height: 30%; display:inline-block; float:left; ">
 	            <div>Result of file processing:</div>
-	            <#list result as file>
+	            <#list result as filer>
 	            <div>
-	            ${file.getName()}
+	            ${filer.getName()}
 	            </div>
 	            </#list>
 	        </div>

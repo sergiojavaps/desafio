@@ -1,4 +1,4 @@
-package br.com.agibank.dataanalysis.rest;
+package br.com.agibank.dataanalysis.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +21,6 @@ import br.com.agibank.dataanalysis.exception.CreateOutputFileException;
 import br.com.agibank.dataanalysis.exception.FileInvalidException;
 import br.com.agibank.dataanalysis.exception.GetInputFilesException;
 import br.com.agibank.dataanalysis.exception.InvalidFileDirectoryException;
-import br.com.agibank.dataanalysis.exception.ReadingInputFileException;
 import br.com.agibank.dataanalysis.exception.SumaryAnalysisException;
 import br.com.agibank.dataanalysis.model.ReportResume;
 import br.com.agibank.dataanalysis.service.DataAnalysisService;
@@ -35,9 +34,9 @@ import br.com.agibank.dataanalysis.service.UploadingService;
  *
  */
 @RestController
-public class ReportResource {
+public class ReportController {
 
-	private static Logger logger = LogManager.getLogger(ReportResource.class);
+	private static Logger logger = LogManager.getLogger(ReportController.class);
 	@Autowired
 	private DataAnalysisService dataAnalysisService;
 	@Autowired
@@ -49,7 +48,8 @@ public class ReportResource {
 		dirList = new ArrayList<String>();
     	dirList.add(AppConstants.READING_DIR);
     	dirList.add(AppConstants.UPLOADING_DIR);
-    	dirList.add(AppConstants.PROCESSED_FILES);		
+    	dirList.add(AppConstants.PROCESSED_FILES);
+    	dirList.add(AppConstants.PROCESSING_FAILURE_DIR);
     }
 	
 	/**
@@ -79,10 +79,6 @@ public class ReportResource {
 		} catch (FileInvalidException fie) {
 			logger.error("it was not possible to validate the file extension. Cause: " + fie);
 			model.addAttribute("errorMessage", "it was not possible to validate the file extension. Cause: " + fie);
-			return new ModelAndView("/error");
-		} catch (ReadingInputFileException rfe) {
-			logger.error("unable to read the input files. Cause: " + rfe);
-			model.addAttribute("errorMessage", "unable to read the input files. Cause: " + rfe);
 			return new ModelAndView("/error");
 		} catch (IOException ioe) {
 			logger.error("failed or interrupted I/O operations. Cause: " + ioe);
