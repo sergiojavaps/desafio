@@ -2,5 +2,6 @@
 
 ## Run 
 ./mvnw spring-boot:run
+http://localhost/8080/
 
-#. the system creates the directories automatically at: %HOMEPATH%data/in, %HOMEPATH%data/out. 
+.The system creates the directories automatically at: %HOMEPATH%data/in, %HOMEPATH%data/out. 
