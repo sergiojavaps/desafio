@@ -54,8 +54,8 @@ public class DataAnalysisService {
 	private CalculationService calculationService;
 	
 	@Async
-	public void execute() throws GetInputFilesException, FileInvalidException, ReadingInputFileException, 
-						IOException, CreateOutputFileException, CalcException {
+	public void execute() throws GetInputFilesException, FileInvalidException, FileNotFoundException, 
+								CreateOutputFileException, IOException, CalcException  {
 		List<File> filesIn = getAllInputFiles();
 		if(Objects.isNull(filesIn) || filesIn.isEmpty()) {
 			Report report = null;
@@ -113,15 +113,34 @@ public class DataAnalysisService {
 	 * @throws CreateOutputFileException 
 	 * @throws CalcException 
 	 */
-	private void createOutputFile(List<File> files) throws ReadingInputFileException, IOException, CreateOutputFileException, CalcException {
+	private void createOutputFile(List<File> files) {
 		Report report = new Report();
+		List<File> brokenFiles = new ArrayList<File>();
+		List<File> validFiles = new ArrayList<File>();
 		for(File file : files) {
-			readingInputFile(file, report);
-			// send to reprocessed directory
-			sendFileToProcessedDirectory(file);
-			
+			try {
+				readingInputFile(file, report);
+				sendFileToProcessedDirectory(file);
+				validFiles.add(file);
+			} catch (ReadingInputFileException | IOException | NumberFormatException e) {
+				logger.error("the input file could not be processed. The file " + file.getName() + " will be copied to the directory "
+						+ "of files with processing failures. Cause: " + e);
+				brokenFiles.add(file);
+			}
 		}
-		createOutputFile(report);
+		try {
+			if(!brokenFiles.isEmpty()) {
+				for(File file : brokenFiles) {
+					sendFileToProcessingFailureDirectory(file);
+				}
+			}
+			if(validFiles.isEmpty()) {
+				report = null;
+			} 
+			createOutputFile(report);
+		} catch (CreateOutputFileException | IOException | CalcException e) {
+			logger.error("it was not possible to create the output file. Cause: " + e);
+		}
 	}
 	
 	/**
@@ -137,7 +156,13 @@ public class DataAnalysisService {
 		File originProcessed = new File(file.getAbsolutePath());
 		File destinyProcessed = new File(AppConstants.PROCESSED_FILES + file.getName());
 		copy(originProcessed, destinyProcessed);
-		//originProcessed.delete();
+	}
+	
+	public void sendFileToProcessingFailureDirectory(File file) throws IOException {
+		File origin = new File(file.getAbsolutePath());
+		File destiny = new File(AppConstants.PROCESSING_FAILURE_DIR + file.getName());
+		copy(origin, destiny);
+		origin.delete();
 	}
 	
 	/**
@@ -197,7 +222,8 @@ public class DataAnalysisService {
 	 * @throws ReadingInputFileException
 	 * @throws IOException
 	 */
-	private Report readingInputFile(File file, Report report) throws ReadingInputFileException, IOException {
+	private void readingInputFile(File file, Report report) throws ReadingInputFileException, IOException, NumberFormatException {
+		boolean isValidDatFile = false;
 		Salesman salesman = null;
 		Client client = null;
 		Sale sale = null;
@@ -215,17 +241,22 @@ public class DataAnalysisService {
 	      if(label.equals(AppConstants.SALESMAN_ID)) {
 	    	  salesman = createSalesmanObject(st); 
 	    	  report.getSalesmanList().add(salesman);
+	    	  isValidDatFile = true;
 	      } else if(label.equals(AppConstants.CLIENT_ID)) {
 	    	  client = createClientObject(st);
 	    	  report.getClientList().add(client);
+	    	  isValidDatFile = true;
 	      } else if(label.equals(AppConstants.SALE_ID)) {
 	    	  sale = createSaleObject(st);
 	    	  report.getSaleList().add(sale);
+	    	  isValidDatFile = true;
 	      } else {
 	        break;
 	      }
 	    }
-		return report;
+		if(!isValidDatFile) {
+			throw new ReadingInputFileException();
+		}
 	}
 	
 	private Salesman createSalesmanObject(StringTokenizer st) {
@@ -351,6 +382,24 @@ public class DataAnalysisService {
 		for(int i = 0; i < files.length; i++) {
 			fileList.add(files[i]);
 			logger.info("::output file: " + files[i].getName());
+		}
+		return fileList;
+	}
+	
+	/**
+	 * 
+	 * get all fail process files
+	 * 
+	 * @return
+	 * @throws FileInvalidException
+	 */
+	public List<File> getFailProcessedFile() throws FileInvalidException {
+		File file = new File(AppConstants.PROCESSING_FAILURE_DIR);
+		File[] files = file.listFiles();
+		List<File> fileList = new ArrayList<File>();
+		for(int i = 0; i < files.length; i++) {
+			fileList.add(files[i]);
+			logger.info("::fail process files: " + files[i].getName());
 		}
 		return fileList;
 	}

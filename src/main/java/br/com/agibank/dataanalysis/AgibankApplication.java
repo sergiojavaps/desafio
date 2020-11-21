@@ -41,7 +41,8 @@ public class AgibankApplication {
 		List<String> dirList = new ArrayList<String>();
     	dirList.add(AppConstants.READING_DIR);
     	dirList.add(AppConstants.UPLOADING_DIR);
-    	dirList.add(AppConstants.PROCESSED_FILES);	
+    	dirList.add(AppConstants.PROCESSED_FILES);
+    	dirList.add(AppConstants.PROCESSING_FAILURE_DIR);
     	try {
 			UploadingService.createDirectoriesFiles(dirList);
 			SpringApplication.run(AgibankApplication.class, args);
