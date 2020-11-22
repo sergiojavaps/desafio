@@ -24,4 +24,8 @@ All new files are available, everything must be executed.
 - java 8.
 - Apache Maven 3.6.0.
 - Tomcat 8 (optional, only if you want to use catalina with the .war file published on your machine).
-
+- Docker (optional)
+1. https://hub.docker.com/r/sergiomelo/agibank
+2. docker pull sergiomelo/agibank
+3. docker container run -p 8080:8080 -it IMAGE_ID
+4. http://localhost:8080/agibank/ 
