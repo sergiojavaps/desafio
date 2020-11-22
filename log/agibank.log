@@ -450,3 +450,6 @@ FTL stack trace ("~" means nesting-related):
 >> Worst Seller: none
 
 2020-11-22 09:35:20.005  INFO 5633 --- [scheduling-1] b.c.a.dataanalysis.job.ProcessFilesJob   : >>>> END JOB
+2020-11-22 10:04:34.287  INFO 5633 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-11-22 10:04:34.352  INFO 5633 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2020-11-22 10:04:34.354  INFO 5633 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
