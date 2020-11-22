@@ -1,14 +1,15 @@
 # Desafio Agibank
 
-Para iniciar o sistema, após executar checkout dos fontes, executar o comando dentro do diretório raiz do projeto: ./mvnw spring-boot:run
+### The system performs the process in two ways:
+1. upload batches of files to http://localhost/8080.
+2. copy batches of files manually to directory %HOMEPATH%data/in, and wait for the system job to finish processing. The job verifies the directory of the files in real time, if the files are added, removed or edited, the job runs the process of generating the resume.done.dat file.  
 
-O sistema possui uma tela, com as funções de upload de arquivos e visualização dos dados calulados, do arquivo '.dat', 'resume.done.dat'.
+### Run 
+- ./mvnw spring-boot:run
+- http://localhost/8080/.
 
-O sistema possui um job, que fica processando apenas os arquivos '.dat', localizados no diretório '%HOMEPATH%/data/in',
-calculando e enviando em tempo real, os dados analisados para o arquivo de destino, 'resume.done.dat' que se encontra no diretório %HOMEPATH%/data/out.
+# What will you need:
+- java 8.
+- Apache Maven 3.6.0.
+- Tomcat 8 (optional, only if you want to use catalina with the .war file published on your machine).
 
-Após iniciar o projeto, você poderá executar o sistema de duas formas:
-1. Via http, realizando upload dos arquivos, no endereço http://localhost:8080/.
-   A tela realiza a importação e leitura dos arquivos '.dat', criação do arquivo de saída 'resume.done.dat', e um link para visualização dos dados, do desafio calculados. 
-2. Copiar os lotes de  arquivos para o diretório '%HOMEPATH%/data/in'.
-  O job é responsável por fazer a leitura dos arquivos .dat, processar, calcular e gerar o arquivo 'resume.done.dat' em tempo real.  
