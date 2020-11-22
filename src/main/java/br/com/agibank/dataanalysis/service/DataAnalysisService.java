@@ -425,4 +425,8 @@ public class DataAnalysisService {
 		return out.toString();
 	}
 	
+	public ReportResume getReportResumeSummaryData() throws SumaryAnalysisException, IOException {
+		return getSummaryOfAnalysis();
+	}
+	
 }

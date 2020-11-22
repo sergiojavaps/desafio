@@ -21,6 +21,8 @@ import br.com.agibank.dataanalysis.exception.GetInputFilesException;
 import br.com.agibank.dataanalysis.exception.InvalidFileDirectoryException;
 import br.com.agibank.dataanalysis.exception.MemoryExceededException;
 import br.com.agibank.dataanalysis.exception.ReadingInputFileException;
+import br.com.agibank.dataanalysis.exception.SumaryAnalysisException;
+import br.com.agibank.dataanalysis.model.ReportResume;
 
 /**
  * 
@@ -70,6 +72,18 @@ public class UploadingService {
 			logger.error(e);
 		}
 		
+	}
+	
+	/**
+	 * 
+	 * Get report resume data object
+	 * 
+	 * @return
+	 * @throws SumaryAnalysisException
+	 * @throws IOException
+	 */
+	public ReportResume getSumaryData() throws SumaryAnalysisException, IOException {
+		return dataAnalysisService.getReportResumeSummaryData();
 	}
 	
 	/**
