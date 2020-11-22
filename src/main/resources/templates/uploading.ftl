@@ -57,6 +57,15 @@
 	            </#list>
 	        </div>
 	        
+	        <div style="width:12%; height: 30%; display:inline-block; float:left; ">
+	            <div>Directories created by the system:</div>
+	            <#list dirList as dir>
+	            <div>
+	            ${dir}
+	            </div>
+	            </#list>
+	        </div>
+	        
         </div>
         
         <script>

@@ -2,6 +2,8 @@ package br.com.agibank.dataanalysis.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,14 +49,20 @@ public class UploadingController {
 	@RequestMapping(value = {"/", "/agibank"})
 	public String uploading(Model model) {
 		try {
+			List<String> dirList = new ArrayList<String>();
 			File file = new File(AppConstants.UPLOADING_DIR);
 			File procFile = new File(AppConstants.PROCESSED_FILES);
 			File failFile = new File(AppConstants.PROCESSING_FAILURE_DIR);
 			File resultFile = new File(AppConstants.READING_DIR);
+			dirList.add(file.getPath());
+			dirList.add(resultFile.getPath());
+			dirList.add(procFile.getPath());
+			dirList.add(failFile.getPath());
 			model.addAttribute("files", file.listFiles());
 			model.addAttribute("procFiles", procFile.listFiles());
 			model.addAttribute("failFiles", failFile.listFiles());
 			model.addAttribute("result", resultFile.listFiles());
+			model.addAttribute("dirList", dirList);
 			model.addAttribute("appContextName", appContext.getApplicationName());
 			return "uploading";
 		} catch(Exception e) {
