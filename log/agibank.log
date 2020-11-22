@@ -453,3 +453,50 @@ FTL stack trace ("~" means nesting-related):
 2020-11-22 10:04:34.287  INFO 5633 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
 2020-11-22 10:04:34.352  INFO 5633 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
 2020-11-22 10:04:34.354  INFO 5633 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-22 16:01:46.548  INFO 9002 --- [main] b.c.a.d.AgibankApplicationTests          : Starting AgibankApplicationTests using Java 1.8.0_201 on sergio-OptiPlex-3060 with PID 9002 (started by sergio in /home/carlos/dev/workspace/agibank)
+2020-11-22 16:01:46.550  INFO 9002 --- [main] b.c.a.d.AgibankApplicationTests          : No active profile set, falling back to default profiles: default
+2020-11-22 16:01:47.189  INFO 9002 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-22 16:01:47.431  INFO 9002 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-11-22 16:01:47.450  INFO 9002 --- [main] b.c.a.d.AgibankApplicationTests          : Started AgibankApplicationTests in 1.052 seconds (JVM running for 1.64)
+2020-11-22 16:01:47.597  INFO 9002 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2020-11-22 16:01:47.598  INFO 9002 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-22 16:46:27.070  INFO 11938 --- [main] b.c.a.dataanalysis.AgibankApplication    : Starting AgibankApplication using Java 1.8.0_201 on sergio-OptiPlex-3060 with PID 11938 (/home/carlos/dev/workspace/agibank/target/classes started by sergio in /home/carlos/dev/workspace/agibank)
+2020-11-22 16:46:27.071  INFO 11938 --- [main] b.c.a.dataanalysis.AgibankApplication    : No active profile set, falling back to default profiles: default
+2020-11-22 16:46:27.476  INFO 11938 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-22 16:46:27.480  INFO 11938 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-22 16:46:27.480  INFO 11938 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-22 16:46:27.500  INFO 11938 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-22 16:46:27.500  INFO 11938 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 397 ms
+2020-11-22 16:46:27.527  INFO 11938 --- [main] b.c.a.dataanalysis.job.ProcessFilesJob   : turn Off The Job -> no;
+2020-11-22 16:46:27.585  INFO 11938 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-22 16:46:27.684  INFO 11938 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-11-22 16:46:27.698  INFO 11938 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-22 16:46:27.705  INFO 11938 --- [main] b.c.a.dataanalysis.AgibankApplication    : Started AgibankApplication in 0.837 seconds (JVM running for 1.168)
+2020-11-22 16:46:42.439  INFO 11938 --- [RMI TCP Connection(5)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-11-22 16:46:42.439  INFO 11938 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-11-22 16:46:42.439  INFO 11938 --- [RMI TCP Connection(4)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-11-22 16:46:42.496  INFO 11938 --- [RMI TCP Connection(5)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2020-11-22 16:46:42.497  INFO 11938 --- [RMI TCP Connection(5)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-22 16:47:14.181  INFO 12015 --- [main] b.c.a.dataanalysis.AgibankApplication    : Starting AgibankApplication using Java 1.8.0_201 on sergio-OptiPlex-3060 with PID 12015 (/home/carlos/dev/workspace/agibank/target/classes started by sergio in /home/carlos/dev/workspace/agibank)
+2020-11-22 16:47:14.182  INFO 12015 --- [main] b.c.a.dataanalysis.AgibankApplication    : No active profile set, falling back to default profiles: default
+2020-11-22 16:47:14.726  INFO 12015 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-22 16:47:14.733  INFO 12015 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-22 16:47:14.734  INFO 12015 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-22 16:47:14.760  INFO 12015 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-22 16:47:14.761  INFO 12015 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 545 ms
+2020-11-22 16:47:14.809  INFO 12015 --- [main] b.c.a.dataanalysis.job.ProcessFilesJob   : TURN OFF THE JOB -> no;
+2020-11-22 16:47:14.880  INFO 12015 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-22 16:47:14.991  INFO 12015 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-11-22 16:47:15.005  INFO 12015 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-22 16:47:15.013  INFO 12015 --- [main] b.c.a.dataanalysis.AgibankApplication    : Started AgibankApplication in 1.054 seconds (JVM running for 1.388)
+2020-11-22 16:47:25.854  INFO 12015 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-11-22 16:47:25.912  INFO 12015 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2020-11-22 16:47:25.914  INFO 12015 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-22 16:50:15.668  INFO 12284 --- [main] b.c.a.d.AgibankApplicationTests          : Starting AgibankApplicationTests using Java 1.8.0_201 on sergio-OptiPlex-3060 with PID 12284 (started by sergio in /home/carlos/dev/workspace/agibank)
+2020-11-22 16:50:15.671  INFO 12284 --- [main] b.c.a.d.AgibankApplicationTests          : No active profile set, falling back to default profiles: default
+2020-11-22 16:50:16.081  INFO 12284 --- [main] b.c.a.dataanalysis.job.ProcessFilesJob   : TURN OFF THE JOB -> NO;
+2020-11-22 16:50:16.313  INFO 12284 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-22 16:50:16.540  INFO 12284 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-11-22 16:50:16.559  INFO 12284 --- [main] b.c.a.d.AgibankApplicationTests          : Started AgibankApplicationTests in 1.06 seconds (JVM running for 1.76)
+2020-11-22 16:50:16.707  INFO 12284 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2020-11-22 16:50:16.707  INFO 12284 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'

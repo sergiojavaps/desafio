@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,16 @@ public class UploadingController {
 	private UploadingService uploadingService;
 	@Autowired
 	private ApplicationContext appContext;
+	private List<String> dirList = null;
+	
+	@PostConstruct
+    public void ini() {    	
+		dirList = new ArrayList<String>();
+    	dirList.add(AppConstants.READING_DIR);
+    	dirList.add(AppConstants.UPLOADING_DIR);
+    	dirList.add(AppConstants.PROCESSED_FILES);
+    	dirList.add(AppConstants.PROCESSING_FAILURE_DIR);
+    }
 	
 	/**
 	 * 
@@ -49,6 +61,7 @@ public class UploadingController {
 	@RequestMapping(value = {"/", "/agibank"})
 	public String uploading(Model model) {
 		try {
+			uploadingService.validateFileDirectory(dirList);
 			List<String> dirList = new ArrayList<String>();
 			File file = new File(AppConstants.UPLOADING_DIR);
 			File procFile = new File(AppConstants.PROCESSED_FILES);

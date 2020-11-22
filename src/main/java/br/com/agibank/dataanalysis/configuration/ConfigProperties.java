@@ -9,6 +9,7 @@ public class ConfigProperties {
 	private String pathIn;
 	private String pathOut;
 	private String pathProcessed;
+	private String turnOffTheJob;
 	
 	public String getTimeJob() {
 		return timeJob;
@@ -33,6 +34,12 @@ public class ConfigProperties {
 	}
 	public void setPathProcessed(String pathProcessed) {
 		this.pathProcessed = pathProcessed;
+	}
+	public String getTurnOffTheJob() {
+		return turnOffTheJob;
+	}
+	public void setTurnOffTheJob(String turnOffTheJob) {
+		this.turnOffTheJob = turnOffTheJob;
 	}
 	
 }

@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import br.com.agibank.dataanalysis.configuration.ConfigProperties;
 import br.com.agibank.dataanalysis.constants.AppConstants;
 import br.com.agibank.dataanalysis.service.DataAnalysisService;
 import br.com.agibank.dataanalysis.service.UploadingService;
@@ -35,6 +36,8 @@ public class ProcessFilesJob {
     private List<String> dirList = null;
     private long totalFile;
     private long totalFileTemp;
+    @Autowired
+    private ConfigProperties configProperties;
     
     @PostConstruct
     public void ini() {    	
@@ -43,6 +46,7 @@ public class ProcessFilesJob {
     	dirList.add(AppConstants.UPLOADING_DIR);
     	dirList.add(AppConstants.PROCESSED_FILES);
     	dirList.add(AppConstants.PROCESSING_FAILURE_DIR);
+    	logger.info("TURN OFF THE JOB -> " + configProperties.getTurnOffTheJob());
     }
     
     /**
@@ -55,22 +59,24 @@ public class ProcessFilesJob {
     @Scheduled(cron = cronConfig, zone = timeZone)
     @Async
     public void processFilesJob() {
-    	try {	
-    		totalFileTemp = uploadingService.getTotalFilesByBytes(); 
-    		if(totalFile != totalFileTemp) { 
-    			logger.info(">>>> INI JOB");   
-		    	uploadingService.validateFileDirectory(dirList);
-		    	dataAnalysisService.execute();	    	
-		    	dataAnalysisService.getAllProcessedFiles();
-		    	dataAnalysisService.getFailProcessedFile();
-		    	dataAnalysisService.getSumaryProcessedFile();		    	
-		    	logger.info(dataAnalysisService.getSummaryData());
-		    	logger.info(">>>> END JOB");	    	  
-    		}
-    		totalFile = totalFileTemp != totalFile ? totalFileTemp : totalFile;
-    	} catch (Exception e) {
-			logger.error("it was not possible to run the job. Cause: " + e);
-		} 		   	
+    	if(configProperties.getTurnOffTheJob().equalsIgnoreCase("NO")) {
+	    	try {	    		
+	    		totalFileTemp = uploadingService.getTotalFilesByBytes(); 
+	    		if(totalFile != totalFileTemp) { 
+	    			logger.info(">>>> INI JOB");   
+			    	uploadingService.validateFileDirectory(dirList);
+			    	dataAnalysisService.execute();	    	
+			    	dataAnalysisService.getAllProcessedFiles();
+			    	dataAnalysisService.getFailProcessedFile();
+			    	dataAnalysisService.getSumaryProcessedFile();		    	
+			    	logger.info(dataAnalysisService.getSummaryData());
+			    	logger.info(">>>> END JOB");	    	  
+	    		}
+	    		totalFile = totalFileTemp != totalFile ? totalFileTemp : totalFile;
+	    	} catch (Exception e) {
+				logger.error("it was not possible to run the job. Cause: " + e);
+			} 
+    	} 
     }
      
 }
