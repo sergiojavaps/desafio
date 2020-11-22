@@ -1,16 +1,16 @@
-# Desafio Agibank
-### Análise de dados
-O sistema deve ler dados do diretório padrão, localizado em %HOMEPATH%/data/in.  
-O sistema deve ler somente arquivos .dat. Depois de processar todos os arquivos dentro do diretório padrão de entrada, o sistema deve criar um   arquivo dentro do diretório de saída padrão, localizado em %HOMEPATH%/data/out.  
-O nome do arquivo deve seguir o padrão, {flat_file_name} .done.dat.  
-O conteúdo do arquivo de saída deve resumir os seguintes dados:
-- Quantidade de clientes no arquivo de entrada
-- Quantidade de vendedor no arquivo de entrada
-- ID da venda mais cara
-- O pior vendedor
+# Agibank Challenge
+### Data analysis
+The system should read data from the default directory, located at %HOMEPATH%/data/in.    
+The system should read only .dat files. After processing all files within the standard input directory, the system should create a file within the   standard output directory, located at %HOMEPATH%/data/out.    
+The file name must follow the pattern, {flat_file_name} .done.dat.  
+The contents of the output file must summarize the following data:
+- Number of customers in the input file
+- Salesperson quantity in input file
+- Most expensive sale ID
+- The worst seller
 
-O sistema deve estar funcionando o tempo todo.      
-Todos os arquivos novos estar disponível, tudo deve ser executado.
+The system must be running at all times.  
+All new files are available, everything must be executed.
 
 ### The system performs the process in two ways:
 1. upload batches of files to http://localhost/8080.
