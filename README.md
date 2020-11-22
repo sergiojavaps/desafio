@@ -18,7 +18,7 @@ All new files are available, everything must be executed.
 
 ### Run 
 - ./mvnw spring-boot:run
-- http://localhost/8080/.
+- http://localhost/8080/
 
 ### What will you need:
 - java 8.
