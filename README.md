@@ -6,6 +6,10 @@
 
 ### Run 
 - ./mvnw spring-boot:run
-- http://localhost/8080/
+- http://localhost/8080/.
 
+# What will you need:
+- java 8.
+- Apache Maven 3.6.0.
+- Tomcat 8 (optional, only if you want to use catalina with the .war file published on your machine).
 
