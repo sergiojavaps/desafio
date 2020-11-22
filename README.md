@@ -13,7 +13,7 @@ The system must be running at all times.
 All new files are available, everything must be executed.
 
 ### The system performs the process in two ways:
-1. upload batches of files to http://localhost/8080.
+1. upload batches of files to http://localhost/8080. You will see that after uploading the files, the system reads only the .dat files, and visually makes available the files that were uploaded, processed or that failed in the reading process, as well as the result of the data read and calculated, as requested in the challenge.
 2. The system automatically creates directories. Copy batches of files manually to directory %HOMEPATH%/data/in, and wait for the system job to finish processing. The job verifies the directory of the files in real time, if the files are added, removed or edited, the job runs the process of generating the resume.done.dat file.  
 
 ### Run 
