@@ -1,8 +1,8 @@
 br.com.agibank.dataanalysis
 br.com.agibank.dataanalysis.configuration
 br.com.agibank.dataanalysis.constants
+br.com.agibank.dataanalysis.controller
 br.com.agibank.dataanalysis.exception
 br.com.agibank.dataanalysis.job
 br.com.agibank.dataanalysis.model
-br.com.agibank.dataanalysis.rest
 br.com.agibank.dataanalysis.service
