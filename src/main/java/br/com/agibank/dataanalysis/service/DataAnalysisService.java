@@ -162,7 +162,7 @@ public class DataAnalysisService {
 		File origin = new File(file.getAbsolutePath());
 		File destiny = new File(AppConstants.PROCESSING_FAILURE_DIR + file.getName());
 		copy(origin, destiny);
-		origin.delete();
+		//origin.delete();
 	}
 	
 	/**
@@ -227,6 +227,7 @@ public class DataAnalysisService {
 		Salesman salesman = null;
 		Client client = null;
 		Sale sale = null;
+		Report reportTemp = new Report();
 		@SuppressWarnings("resource")
 		BufferedReader in = new BufferedReader(
                 new FileReader(file)
@@ -240,20 +241,29 @@ public class DataAnalysisService {
 	      String label = st.nextToken();
 	      if(label.equals(AppConstants.SALESMAN_ID)) {
 	    	  salesman = createSalesmanObject(st); 
-	    	  report.getSalesmanList().add(salesman);
+	    	  reportTemp.getSalesmanList().add(salesman);
 	    	  isValidDatFile = true;
 	      } else if(label.equals(AppConstants.CLIENT_ID)) {
 	    	  client = createClientObject(st);
-	    	  report.getClientList().add(client);
+	    	  reportTemp.getClientList().add(client);
 	    	  isValidDatFile = true;
 	      } else if(label.equals(AppConstants.SALE_ID)) {
 	    	  sale = createSaleObject(st);
-	    	  report.getSaleList().add(sale);
+	    	  reportTemp.getSaleList().add(sale);
 	    	  isValidDatFile = true;
 	      } else {
 	        break;
 	      }
 	    }
+		if(Objects.nonNull(reportTemp.getSalesmanList()) && !reportTemp.getSalesmanList().isEmpty()) {
+			report.getSalesmanList().addAll(reportTemp.getSalesmanList());
+		}
+		if(Objects.nonNull(reportTemp.getClientList()) && !reportTemp.getClientList().isEmpty()) {
+			report.getClientList().addAll(reportTemp.getClientList());
+		}
+		if(Objects.nonNull(reportTemp.getSaleList()) && !reportTemp.getSaleList().isEmpty()) {
+			report.getSaleList().addAll(reportTemp.getSaleList());
+		}	
 		if(!isValidDatFile) {
 			throw new ReadingInputFileException();
 		}
